@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Form Validation</title>
+    <style>
+        h1{
+            margin-left: 270px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 50px;
+        }
+        body{
+            padding: 10px 50px;
+        }
+        .fromdesign{
+           font-size: 40px;
+        }
+        .fromdesign input{
+            width: 50%;
+            border: 3px solid0px;
+            border-radius: 20px;
+            margin: 14px;
+            font-size: larger;
+        }
+        .error{
+            color: red;
+            font-size: large;
+        }
+        .but{
+            width: 100px;
+            height: 60px;
+            font-size: large;
+            border: blueviolet 3px solid;
+            border-radius: 40px;
+            
+        }
+        #buton{
+            width: 230px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Contact Form </h1>
+
+    <form class="container" action= "/myaction.php" name="myform" onsubmit="return formvalidate()" method="post" >
+        <div class="fromdesign" id="fname">
+           Name: <input type="text" name = "name" required> <b><span class="error"></span></b>
+        </di>
+        <div class="fromdesign" id="femail">
+           Email: <input type="email" name = "email" required> <b><span class="error"></span></b>
+        </div>
+        <div class="fromdesign" id="fphone">
+           Phone: <input type="phone" name = "phone" required> <b><span class="error"></span></b>
+        </div>
+        <div class="fromdesign" id="fpass">
+           Password: <input type="password" name = "pass" required> <b><span class="error"></span></b>
+        </div>
+        <div class="fromdesign" id="fcpass">
+           Confirm Password: <input type="password" name = "cpass" required> <b><span class="error"></span></b>
+        </div>
+        <input type="submit" class="but" name="button" id="buton" value="Submit">
+    </form>
+
+
+
+
+    <script>
+
+        function seterror(id , error){
+            element = document.getElementById(id); 
+            element.getElementsByClassName("error")[0].innerHTML = error;
+        }
+
+        function autouqdate(){
+            let a = document.getElementsByClassName("error");
+            for(let items of a ){
+                items.innerHTML = '';
+            }
+        }
+
+
+
+        function formvalidate(){
+            autouqdate();
+            valereturn = true; 
+            var name = document.forms["myform"]["name"].value;
+            if(name.length<5){
+                seterror("fname" , "*Your name is too short" )
+                valereturn = false;
+            }
+            var email = document.forms["myform"]["email"].value;
+            if(email.length>15){
+                seterror("femail" , "*Your email is too long" )
+                valereturn = false;
+            }
+            var phone = document.forms["myform"]["phone"].value;
+            if(phone.length != 10){
+                seterror("fphone" , "*Your Phone Number Length Should Be Equal To 10" )
+                valereturn = false;
+            }
+            var pass = document.forms["myform"]["pass"].value;
+            if(pass.length< 15){
+                seterror("fpass" , "*Your Password Length is Too Short" )
+                valereturn = false;
+            }
+            var cpass = document.forms["myform"]["cpass"].value;
+            if(cpass != pass){
+                seterror("fcpass" , "*Password Should Match" )
+                valereturn = false;
+            }
+            // console.log(name);
+            return valereturn;
+
+        }
+    </script>
+</body>
+
+
+
+</html>
